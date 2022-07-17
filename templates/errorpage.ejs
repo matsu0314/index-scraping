@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <%- include("./head", {title: "エラー Raku安サーチ（らくやすサーチ）"}); %>
+  </head>
+  <body>
+    <%- include("./header") %>
+    <main class="error-container">
+      <p>検索したいキーワードを入力してください。</p>
+      <div class="form-area"><%- include("./form", {inputKeyword: ""}) %></div>
+      <p class="message"><%= message %></p>
+    </main>
+    <footer><%- include("./footer") %></footer>
+  </body>
+</html>

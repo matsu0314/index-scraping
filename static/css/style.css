@@ -1,0 +1,434 @@
+@charset "UTF-8";
+/*********************************
+	共通
+*********************************/
+html,
+body {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Noto Sans JP", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  word-break: break-all;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  color: #151515;
+}
+
+body.loading {
+  overflow: hidden;
+}
+
+header {
+  padding: 10px;
+  box-shadow: 0px 0px 15px -5px #777777;
+}
+header .inner {
+  width: 100%;
+  max-width: 1050px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  overflow-y: hidden;
+}
+header .inner .logo {
+  flex: 0 1 270px;
+}
+header .inner .use {
+  margin-left: auto;
+}
+header h1 {
+  max-width: 180px;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+header .description {
+  font-size: 0.7em;
+  padding: 0;
+  margin: 0;
+}
+
+footer {
+  background: #000;
+  color: #fff;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+main {
+  width: 100%;
+  max-width: 1050px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+@media (min-width: 768px) {
+  main {
+    padding: 20px;
+  }
+}
+
+.notice {
+  color: #E50012;
+}
+
+/*********************************
+	サーチテーブル
+*********************************/
+#result-table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 14px;
+  border-bottom: solid 1px #d4d4d4;
+}
+#result-table th {
+  display: none;
+}
+#result-table td {
+  width: 100%;
+  display: block;
+}
+@media (min-width: 768px) {
+  #result-table th,
+#result-table td {
+    width: auto;
+    display: table-cell;
+  }
+}
+#result-table th {
+  padding: 10px;
+  background: #FFFFCC;
+  border: solid 1px #d4d4d4;
+  vertical-align: center;
+  position: relative;
+  color: #7c7c7c;
+}
+#result-table td {
+  padding: 10px;
+  border: solid 1px #d4d4d4;
+  border-bottom: none;
+  text-align: left;
+}
+#result-table th.number {
+  width: 55px;
+  font-size: 12px;
+  border-bottom: none;
+}
+#result-table th.thumbnail {
+  width: 120px;
+}
+#result-table th.price {
+  width: 90px;
+}
+#result-table th.shipping {
+  width: 90px;
+}
+#result-table th.point {
+  width: 100px;
+}
+#result-table tr td:nth-child(1) {
+  text-align: center;
+  background: #FFFFCC;
+}
+#result-table th.number:after,
+#result-table th.pay:after,
+#result-table th.price:after,
+#result-table th.shipping:after {
+  content: "";
+  display: inline-block;
+  margin-left: 3px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 4px 0 4px;
+  border-color: #7a7a7a transparent transparent transparent;
+}
+#result-table .selectrows {
+  background: #d2f8f6 !important;
+}
+#result-table th.number.selectArrowUp,
+#result-table th.pay.selectArrowUp,
+#result-table th.price.selectArrowUp,
+#result-table th.shipping.selectArrowUp,
+#result-table th.number.selectArrowDown,
+#result-table th.pay.selectArrowDown,
+#result-table th.price.selectArrowDown,
+#result-table th.shipping.selectArrowDown {
+  background: #9ae8e4;
+  color: #2c9d98;
+}
+#result-table th.number.selectArrowDown:after,
+#result-table th.pay.selectArrowDown:after,
+#result-table th.price.selectArrowDown:after,
+#result-table th.shipping.selectArrowDown:after {
+  border-width: 6px 4px 0 4px;
+  border-color: #7a7a7a transparent transparent transparent;
+}
+#result-table th.number.selectArrowUp:after,
+#result-table th.pay.selectArrowUp:after,
+#result-table th.price.selectArrowUp:after,
+#result-table th.shipping.selectArrowUp:after {
+  border-width: 0 4px 6px 4px;
+  border-color: transparent transparent #7a7a7a transparent;
+}
+@media (min-width: 768px) {
+  #result-table tr td:nth-child(1) {
+    border-bottom: #d4d4d4;
+    background: none;
+  }
+}
+#result-table tr td:nth-child(1),
+#result-table tr td:nth-child(4),
+#result-table tr td:nth-child(5) {
+  word-break: normal;
+}
+#result-table tr td:nth-child(1)::before {
+  content: "No.";
+}
+#result-table tr td:nth-child(4)::before {
+  content: "支払い価格（価格＋送料）：";
+}
+#result-table tr td:nth-child(5)::before {
+  content: "ポイント：";
+}
+#result-table tr td:nth-child(6)::before {
+  content: "価格：";
+}
+#result-table tr td:nth-child(7)::before {
+  content: "送料：";
+}
+#result-table tr td:nth-child(2) img {
+  max-width: 50vw;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 768px) {
+  #result-table tr td:nth-child(1)::before,
+#result-table tr td:nth-child(4)::before,
+#result-table tr td:nth-child(5)::before,
+#result-table tr td:nth-child(6)::before,
+#result-table tr td:nth-child(7)::before {
+    display: none;
+  }
+}
+
+/*********************************
+	検索結果のポイント
+*********************************/
+#howtouse {
+  position: absolute;
+  top: -80px;
+  background: #4DC4FF;
+  z-index: 100;
+  border-radius: 5px;
+  width: 140px;
+  height: 80px;
+  padding: 10px;
+  font-size: 0.9em;
+  color: #fff;
+  font-weight: normal;
+  text-align: left;
+  transition: all 1s 0s ease;
+}
+#howtouse::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  bottom: -10px;
+  display: inline-block;
+  margin-left: 3px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 12px 10px 0 10px;
+  border-color: #4DC4FF transparent transparent transparent;
+}
+#howtouse.hidden {
+  opacity: 0;
+}
+
+/*********************************
+	アニメーション
+*********************************/
+/* 回転するアニメーション */
+@keyframes fuwafuwa {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.anime-fuwa {
+  animation: 3s fuwafuwa infinite;
+}
+
+/*********************************
+	入力フォーム
+*********************************/
+input {
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: 0.3s ease;
+  color: #868283;
+}
+
+.search-input {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-input input[type=text] {
+  flex: 0 1 65%;
+}
+
+.search-input input[type=submit] {
+  flex: 0 1 32%;
+}
+
+input[type=text] {
+  width: calc(100% - 32px);
+  border: 2px solid #868283;
+}
+
+input[type=text]:placeholder-shown {
+  border: 2px solid #eae4da;
+}
+
+input[type=text]::placeholder {
+  color: #a3a5aa;
+}
+
+input[type=submit] {
+  background: #bf0000;
+  color: #eae4da;
+  border: 2px solid #bf0000;
+  width: calc(50% - 30px);
+  height: 40px;
+  font-weight: 800;
+  letter-spacing: 1.8pt;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+input[type=submit]:hover {
+  opacity: 0.8;
+}
+
+input[type=submit]:focus {
+  outline: 0;
+}
+
+/*********************************
+	エラーページ
+*********************************/
+.message {
+  text-align: center;
+  margin-top: 30px;
+  padding: 10px;
+  background: #fffacf;
+  color: #E50012;
+}
+
+/*********************************
+	カバー
+*********************************/
+.cover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/*********************************
+	モーダル
+*********************************/
+#open {
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #4caf50;
+  background: #ececec;
+  padding: 10px 20px;
+  transition: all 0.3s;
+}
+#open:hover {
+  background: #c2e6c3;
+}
+
+#close {
+  cursor: pointer;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px;
+  margin: 30px auto 0;
+  background: #4caf50;
+  color: white;
+  position: relative;
+  top: 30%;
+}
+
+#modal {
+  background: #fff;
+  max-width: 960px;
+  width: calc(100% - 20px);
+  max-height: 100vw;
+  overflow: scroll;
+  padding: 1.3em;
+  border-radius: 4px;
+  color: #555;
+  font-size: 0.85em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  margin: 0 auto;
+  z-index: 2;
+}
+#modal p {
+  margin: 0 0 20px;
+}
+#modal ul {
+  padding: 0;
+  padding-left: 1.5em;
+}
+#modal ul li {
+  margin-top: 5px;
+}
+#modal .ttl {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #E50012;
+}
+#modal .sub-ttl {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #4caf50;
+}
+#modal.hidden {
+  display: none;
+}

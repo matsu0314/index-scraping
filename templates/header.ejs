@@ -1,0 +1,34 @@
+<header>
+  <div class="inner">
+    <div class="logo">
+      <p class="description">『らくやすサーチ』楽天の検索結果を表示</p>
+      <h1><img src="/static/images/logo.png" alt="楽安サーチ" /></h1>
+    </div>
+    <div id="open" class="use">使い方</div>
+  </div>
+</header>
+<%- include("./modal") %>
+
+<script>
+  const open = document.getElementById('open');
+  const close = document.getElementById('close');
+  const modal = document.getElementById('modal');
+  const body = document.querySelector('body');
+
+  open.addEventListener('click', () => {
+    const divElm = document.createElement('div');
+    divElm.classList.add('cover');
+    modal.classList.remove('hidden');
+    body.appendChild(divElm);
+    body.classList.add('loading');
+
+    document.querySelector('.cover').addEventListener('click', function () {
+      modal.classList.add('hidden');
+      this.remove();
+    });
+  });
+  close.addEventListener('click', function () {
+    modal.classList.add('hidden');
+    document.querySelector('.cover').remove();
+  });
+</script>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <%- include("./head", {title: "トップ Raku安サーチ（らくやすサーチ）"}); %>
+  </head>
+  <body>
+    <%- include("./header") %>
+    <main class="top-container">
+      <p>楽天で検索したいキーワードを入力してください。</p>
+      <div class="form-area"><%- include("./form", {inputKeyword: ""}) %></div>
+    </main>
+    <footer><%- include("./footer") %></footer>
+  </body>
+</html>

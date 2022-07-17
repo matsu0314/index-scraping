@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <head>
+      <%- include("./head", {title: "検索結果 Raku安サーチ（らくやすサーチ）"});
+      %>
+    </head>
+  </head>
+  <body>
+    <%- include("./header") %>
+    <main class="result-container">
+      <div class="form-area"><%- include("./form", {inputKeyword}) %></div>
+      <div class="result-area">
+        <% if(data.length >= Number(String(allNum).replace(",", ""))) { %>
+        <p class="result-num"><span><%= allNum %></span>件見つかりました。</p>
+        <% } else { %>
+
+        <p class="result-num short">
+          <span class="notice">取得できないデータがありました</span><br />
+          検索結果<%= allNum %>件の内、<span><%= data.length %></span
+          >件を取得しました。
+        </p>
+        <% } %>
+
+        <table id="result-table">
+          <tr>
+            <th class="number">No</th>
+            <th class="thumbnail">サムネイル</th>
+            <th class="product">商品名</th>
+            <th class="pay">
+              支払い金額(円)
+              <div id="howtouse" class="anime-fuwa">
+                支払い金額 (価格+送料)をソートしてお得な商品を探そう！
+              </div>
+            </th>
+            <th class="point">ポイント</th>
+            <th class="price">価格(円)</th>
+            <th class="shipping">送料(円)</th>
+            <th class="url">URL</th>
+          </tr>
+          <% data.forEach((item, i) => { %>
+          <tr>
+            <td><%= i+1 %></td>
+            <td><img src="<%= item.itemImg %>" /></td>
+            <td><%= item.title %></td>
+            <td><%= item.pay %></td>
+            <td><%= item.points %></td>
+            <td><%= item.price %></td>
+            <td><%= item.shipping %></td>
+            <td>
+              <a href="<%= item.itemUrl %>" target="_blank"
+                ><%= item.itemUrl %></a
+              >
+            </td>
+          </tr>
+          <% }) %>
+        </table>
+      </div>
+    </main>
+    <footer><%- include("./footer") %></footer>
+
+    <script>
+      // ページが読み込まれたらLoaderを削除
+      const options = {
+        childList: true,
+      };
+
+      //ターゲット要素をDOMで取得
+      const target = document.querySelector('#result-table');
+      //インスタンス化
+      const obs = new MutationObserver((mutationsList, observer) => {
+        const loadingElm = document.getElementsByTagName('body');
+        loadingElm.remove();
+      });
+      //ターゲット要素の監視を開始
+      obs.observe(target, options);
+
+      const tableNum = document.querySelectorAll('#result-table tr').length - 1;
+    </script>
+
+    <script>
+      const resultTable = document.getElementById('result-table');
+      const resultAllTR = resultTable.querySelectorAll('tr');
+      const resultAllTH = resultTable.querySelectorAll('th');
+      const resultAllTD = resultTable.querySelectorAll('td');
+      const sortItem = ['number', 'pay', 'price', 'shipping'];
+      const howToUse = document.getElementById('howtouse');
+
+      let sortFlag = false;
+
+      resultAllTH.forEach((th) => {
+        if (sortItem.includes(th.className)) {
+          th.addEventListener('click', function () {
+            // クリックした列の番号
+            const columIndex = this.cellIndex;
+            // クリックした要素の親
+            const tbodyElm = this.parentNode.parentNode;
+            // ソートした値を格納
+            const sortAry = [];
+
+            howToUse.classList.add('hidden');
+
+            // 初期化
+            resultAllTH.forEach((th) => {
+              th.classList.remove('selectArrowUp');
+              th.classList.remove('selectArrowDown');
+            });
+            resultAllTD.forEach((td) => {
+              td.classList.remove('selectrows');
+            });
+
+            // ソート順フラグ
+            sortFlag = !sortFlag;
+
+            // テーブルの行
+            let rows = resultTable.rows;
+
+            // テーブルの値を配列に格納
+            for (let i = 1; i < rows.length; i++) {
+              let sortObj = {};
+              let row = rows[i];
+              let colNum = rows[i].cells[columIndex].textContent;
+              let target = colNum === '送料無料' ? '-1' : colNum;
+
+              sortObj.tr = row;
+              sortObj.target = Number(target);
+              sortAry.push(sortObj);
+
+              // クリックした列にクラス追加
+              rows[i].cells[columIndex].classList.add('selectrows');
+            }
+            // ソート前
+            console.log('ソート前', sortAry);
+
+            // 「昇順」「降順」に並べ替え
+            let sortAryResult;
+            if (!sortFlag) {
+              this.classList.add('selectArrowDown');
+              this.classList.remove('selectArrowUp');
+              sortAryResult = sortAry.sort(function (a, b) {
+                if (a['target'] > b['target']) return 1;
+                if (a['target'] < b['target']) return -1;
+                return 0;
+              });
+            } else {
+              this.classList.add('selectArrowUp');
+              this.classList.remove('selectArrowDown');
+              sortAryResult = sortAry.sort(function (a, b) {
+                if (a['target'] < b['target']) return 1;
+                if (a['target'] > b['target']) return -1;
+                return 0;
+              });
+            }
+
+            // ソート後
+            console.log('ソート後', sortAryResult);
+
+            // 並べ替えたデータをレンダリング
+            sortAryResult.forEach((item) => {
+              tbodyElm.appendChild(item.tr);
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

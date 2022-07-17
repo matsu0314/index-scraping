@@ -1,0 +1,23 @@
+<form class="search-input" action="/" method="POST">
+  <input type="text" name="researchItem" <% if(inputKeyword !== "") { %>
+  value="<%= inputKeyword %>" <% } %> />
+  <input id="resarch-btn" type="submit" value="検索" />
+</form>
+
+<script>
+  document.querySelector('#resarch-btn').addEventListener('click', () => {
+    //　Loader要素を作成
+    const divElm = document.createElement('div');
+    const pElm = document.createElement('p');
+    divElm.classList.add('cover');
+    pElm.classList.add('loader');
+    document.querySelector('body').classList.add('loading');
+    document.querySelector('body').appendChild(divElm);
+    document.querySelector('body').appendChild(pElm);
+
+    const resultArea = document.querySelector('.result-area');
+    if (resultArea !== null) {
+      resultArea.remove();
+    }
+  });
+</script>

@@ -1,0 +1,5 @@
+@mixin pc {
+  @media (min-width: 768px) {
+      @content;
+  }
+}

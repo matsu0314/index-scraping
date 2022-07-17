@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+//変数-フォント----------------------
+// @font-face {
+//     font-family: 'Kosugi Maru';
+//     src: url('/contents/shop/00000003/css/new/fonts/KosugiMaru-Regular.ttf') format('truetype');
+// }
+
+$serif: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", 'Noto Sans JP', "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+
+
+$baseFontSize: 21px;
+$baseSpFontSize: 15px;
+
+$tableBgColor: #FFFFCC;
+$tableBorderColor: #d4d4d4;
+$arrowColor: #7a7a7a;
+
+$ttlFontSizePc: 38px;
+$ttlFontSizeSp: 24px;
+
+$baseFontColor: #151515;
+
+$pointColorRed: #E50012;
+
+
+
+$IMG_PATH: '/contents/shop/00000003/image/static/humhum/';
+// $IMG_PATH:'https://www.rakuten.ne.jp/gold/cococimo/contents/shop/00000003/image/static/humhum/';
+
+
+//変数-スペースー----------------------
+$contentSpacePC: 60px;
+$contentSpaceSP: 30px;
+
+$contentInnerSpacePC: 40px;
+$contentInnerSpaceSP: 10px;
+
+$subttlSpacePC: 30px;
+$subttlSpaceSP: 15px;
+
+//画像タイトルサイズー----------------------
+$ttlImgSizeSP: 340px;
