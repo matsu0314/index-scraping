@@ -24,17 +24,6 @@ app.get('*', (req, res) => {
   res.render('errorpage', { message: 'ページが存在しません。' });
 });
 
-// app.get('/', (req, res) => {
-//   res.render('index');
-// });
-
-// app.post('/', (req, res) => {
-//   const inputKeyword = req.body.researchItem;
-
-//   // 検索結果取得
-//   getItems(inputKeyword, res);
-// });
-
 // Connecting to port
 const port = process.env.PORT || 5000;
 // Connecting to port
