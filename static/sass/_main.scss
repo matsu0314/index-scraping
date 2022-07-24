@@ -135,6 +135,12 @@ main {
     text-align: center;
     background: $tableBgColor;
   }
+  th.number:hover,
+  th.pay:hover,
+  th.price:hover,
+  th.shipping {
+    cursor: pointer;
+  }
 
   th.number:after,
   th.pay:after,

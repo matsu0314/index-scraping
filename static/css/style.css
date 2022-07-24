@@ -146,6 +146,12 @@ main {
   text-align: center;
   background: #FFFFCC;
 }
+#result-table th.number:hover,
+#result-table th.pay:hover,
+#result-table th.price:hover,
+#result-table th.shipping {
+  cursor: pointer;
+}
 #result-table th.number:after,
 #result-table th.pay:after,
 #result-table th.price:after,
