@@ -16,7 +16,7 @@ module.exports = async (inputKeyword, res) => {
     console.log('response：' + baseURL + encodeKeyword);
 
     const htmlParser = response.data;
-    console.log("response.data" + response.data)
+    console.log("response.data：" + response.data)
     let allNum = 0;
     let displayNum = 0;
     let displayAllPage = 0;
