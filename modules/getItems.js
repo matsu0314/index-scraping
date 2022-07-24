@@ -12,7 +12,12 @@ module.exports = async (inputKeyword, res) => {
   const data = [];
 
   try {
-    const response = await axios.get(baseURL + encodeKeyword);
+    const response = await axios.get(baseURL + encodeKeyword, {
+      headers: {
+          referer: 'https://www.rakuten.co.jp/',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36'
+      }
+    });
     console.log('response：' + baseURL + encodeKeyword);
 
     const htmlParser = response.data;
