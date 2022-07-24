@@ -7,11 +7,13 @@ module.exports = async (inputKeyword, res) => {
   const baseURL = 'https://search.rakuten.co.jp/search/mall/';
 
   const encodeKeyword = encodeURI(inputKeyword.replace(/\s/g, '+'));
+  console.log('encodeKeyword：' + encodeKeyword);
 
   const data = [];
 
   try {
     const response = await axios.get(baseURL + encodeKeyword);
+    console.log('response：' + baseURL + encodeKeyword);
 
     const htmlParser = response.data;
     let allNum = 0;
@@ -40,6 +42,9 @@ module.exports = async (inputKeyword, res) => {
     do {
       const responsePage = await axios.get(
         `${baseURL}${encodeKeyword}?p=${displayTargetNum}`
+      );
+      console.log(
+        'doWhile：' + `${baseURL}${encodeKeyword}?p=${displayTargetNum}`
       );
 
       const htmlParserPage = responsePage.data;
