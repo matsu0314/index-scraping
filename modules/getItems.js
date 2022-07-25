@@ -7,25 +7,22 @@ module.exports = async (inputKeyword, res) => {
   const baseURL = 'https://search.rakuten.co.jp/search/mall/';
 
   const encodeKeyword = encodeURI(inputKeyword.replace(/\s/g, '+'));
-  console.log('encodeKeyword：' + encodeKeyword);
 
   const data = [];
 
+  const config = {
+    headers: {
+      referer: 'https://www.rakuten.co.jp/',
+      'user-agent':
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36',
+    },
+  };
+
   try {
-    const response = await axios.get(baseURL + encodeKeyword, {
-      headers: {
-          referer: 'https://www.rakuten.co.jp/',
-          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36'
-      },
-      data: {}
-    });
-
-
-
-    console.log('response：' + baseURL + encodeKeyword);
+    const response = await axios.get(baseURL + encodeKeyword, config);
 
     const htmlParser = response.data;
-    console.log("response.data：" + response.data)
+
     let allNum = 0;
     let displayNum = 0;
     let displayAllPage = 0;
@@ -52,9 +49,6 @@ module.exports = async (inputKeyword, res) => {
     do {
       const responsePage = await axios.get(
         `${baseURL}${encodeKeyword}?p=${displayTargetNum}`
-      );
-      console.log(
-        'doWhile：' + `${baseURL}${encodeKeyword}?p=${displayTargetNum}`
       );
 
       const htmlParserPage = responsePage.data;
