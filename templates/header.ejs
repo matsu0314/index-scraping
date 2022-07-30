@@ -24,11 +24,13 @@
 
     document.querySelector('.cover').addEventListener('click', function () {
       modal.classList.add('hidden');
+      body.classList.remove('loading');
       this.remove();
     });
   });
   close.addEventListener('click', function () {
     modal.classList.add('hidden');
     document.querySelector('.cover').remove();
+    body.classList.remove('loading');
   });
 </script>
