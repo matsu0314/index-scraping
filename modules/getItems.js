@@ -1,5 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const sleep = require('./sleep');
 
 // 検索結果を取得
 module.exports = async (inputKeyword, res) => {
@@ -78,6 +79,8 @@ module.exports = async (inputKeyword, res) => {
       });
 
       displayTargetNum = displayTargetNum + 1;
+
+      await sleep(1000); // 1秒待機
     } while (displayAllPage >= displayTargetNum);
 
     // 検索結果表示
